@@ -1,21 +1,28 @@
-## Install Kubernetes 
+## Install Kubectl
+
+1. Download the latest release with the command:
+```
+curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
+```
+2. Validate the binary (optional)
+
+> Download the kubectl checksum file:
 
 ```
-curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key add
+curl -LO "https://dl.k8s.io/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl.sha256"
 ```
+> Validate the kubectl binary against the checksum file:
 ```
-sudo apt-add-repository "deb http://apt.kubernetes.io/ kubernetes-xenial main"
-```
-```
-sudo apt-get install kubeadm kubelet kubectl
-```
-```
-sudo apt-mark hold kubeadm kubelet kubectl
-```
-```
-(each node) version
+echo "$(cat kubectl.sha256)  kubectl" | sha256sum --check
 ```
 
----
+> If valid, the output is:
 
-## Kubernetes Deployment
+```
+kubectl: OK
+```
+3. Install kubectl
+
+```
+sudo install -o root -g root -m 0755 kubectl /usr/local/bin/kubectl
+```
