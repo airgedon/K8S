@@ -53,3 +53,10 @@ kubectl create clusterrolebinding cluster-admin-binding \
 
 Did you enter your email correctly? If not, you can run `kubectl delete clusterrolebinding cluster-admin-binding` and do it again.
 
+---
+
+> Install the package manager for k8s for installing, upgrading and managing applications on a Kubernetes cluster ( Helm packages are called charts )
+
+```
+curl https://raw.githubusercontent.com/helm/helm/HEAD/scripts/get-helm-3 | bash
+```
