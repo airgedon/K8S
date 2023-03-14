@@ -1,3 +1,5 @@
+[Source Doc](https://z2jh.jupyter.org/en/latest/kubernetes/google/step-zero-gcp.html)
+
 > :bulb: Download and install the gcloud command line tool. It will help you create and communicate with a Kubernetes cluster.
 
 in your  home directory
