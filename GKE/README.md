@@ -30,4 +30,5 @@ gcloud components install kubectl
 ```
 > after creating k8s kluster
 
-gcloud container clusters create --machine-type n1-standard-2 --num-nodes 2 --zone `us-central1` --cluster-version latest `autopilot-cluster-1`
+> CONNECT 
+gcloud container clusters get-credentials autopilot-cluster-1 --region us-central1 --project eco-spirit-380605
