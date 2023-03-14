@@ -32,3 +32,24 @@ gcloud components install kubectl
 
 > CONNECT 
 gcloud container clusters get-credentials autopilot-cluster-1 --region us-central1 --project eco-spirit-380605
+
+> To test if your cluster is initialized, run:
+
+```
+kubectl get node
+
+```
+> The response should list two running nodes (or however many nodes you set with --num-nodes above).
+
+---
+
+ > Give your account permissions to perform all administrative actions needed.
+ 
+```
+kubectl create clusterrolebinding cluster-admin-binding \
+  --clusterrole=cluster-admin \
+  --user=dozzylind@gmail.com  
+```
+
+Did you enter your email correctly? If not, you can run `kubectl delete clusterrolebinding cluster-admin-binding` and do it again.
+
