@@ -26,3 +26,5 @@ tar -xf google-cloud-cli-421.0.0-linux-x86_64.tar.gz
 ```
 gcloud components install kubectl
 ```
+
+gcloud container clusters create --machine-type n1-standard-2 --num-nodes 2 --zone `us-central1` --cluster-version latest `autopilot-cluster-1`
