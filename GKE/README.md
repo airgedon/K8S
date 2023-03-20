@@ -53,7 +53,7 @@ gcloud components install gke-gcloud-auth-plugin
 ---
 
 
-> Connect to the cluster that have already created in gcp
+> Connect to the cluster that have already been created in cloud
 ```
 gcloud container clusters get-credentials cluster-1 --zone europe-north1-c --project eco-spirit-380605
 ```
