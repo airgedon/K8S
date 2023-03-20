@@ -26,7 +26,7 @@ tar -xf google-cloud-cli-421.0.0-linux-x86_64.tar.gz
 ```
 ./google-cloud-sdk/bin/gcloud init
 ```
-
+##### Activate API one time in the beginning
 ```
 gcloud services enable container.googleapis.com
 ```
