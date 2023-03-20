@@ -43,15 +43,17 @@ kubectl version --client
 ```
 ---
 
-> Connect to the cluster that have already created in gcp
-```
-gcloud container clusters get-credentials cluster-1 --zone europe-north1-c --project eco-spirit-380605
-```
-
 ### You will need to install the gke-gcloud-auth-plugin binary on all systems where kubectl or Kubernetes custom clients are used. To install the binary, use one of the following methods.
 
 > Install using "gcloud components install"
 
 ```
 gcloud components install gke-gcloud-auth-plugin
+```
+---
+
+
+> Connect to the cluster that have already created in gcp
+```
+gcloud container clusters get-credentials cluster-1 --zone europe-north1-c --project eco-spirit-380605
 ```
