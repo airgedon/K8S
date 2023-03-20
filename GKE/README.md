@@ -60,3 +60,8 @@ Did you enter your email correctly? If not, you can run `kubectl delete clusterr
 ```
 curl https://raw.githubusercontent.com/helm/helm/HEAD/scripts/get-helm-3 | bash
 ```
+---
+
+```
+gcloud services enable container.googleapis.com
+```
