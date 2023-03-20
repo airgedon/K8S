@@ -12,6 +12,9 @@ curl -O https://dl.google.com/dl/cloudsdk/channels/rapid/downloads/google-cloud-
 ```
 tar -xf google-cloud-cli-421.0.0-linux-x86_64.tar.gz 
 ```
+```
+./google-cloud-sdk/install.sh
+```
 
 >  To initialize the gcloud CLI, run gcloud init:
 
