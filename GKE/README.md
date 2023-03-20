@@ -15,6 +15,11 @@ tar -xf google-cloud-cli-421.0.0-linux-x86_64.tar.gz
 ```
 ./google-cloud-sdk/install.sh
 ```
+###### Modify profile to update your $PATH and enable bash completion? (Y/n)   `Y`
+
+[path-to-my-home]/google-cloud-sdk/completion.bash.inc
+
+---
 
 >  To initialize the gcloud CLI, run gcloud init:
 
