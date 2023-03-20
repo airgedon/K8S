@@ -57,3 +57,4 @@ gcloud components install gke-gcloud-auth-plugin
 ```
 gcloud container clusters get-credentials cluster-1 --zone europe-north1-c --project eco-spirit-380605
 ```
+⚠️: use zonal clusters not regional because it needs more quotes 300(meanwhile you only have 250 limit)
