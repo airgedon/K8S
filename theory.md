@@ -17,10 +17,10 @@
   - Volume component is used to store your db, it could be remote or local
   - cause when db pod dies, it's db would be gone , Volumes can help to avoid it (it is like external hard drive)
 -  **Deployment** and **Stateful Set**
-  - so when pod dies, there will be downtime where user can reach, so thats why we are replicating everything
-  - we should specify how many replicas should run , define that blueprints and these are Deployment
-  - you mostly work with Deployment rather than with nodes
-  - if your pod dies, service will forward the request to another working replica to avoid downtime 
-  - :warning: DB can't be replicated via Deployment
-  - If we the clones replicas of db they would all need to  access the same shared data storage and there
-  - you would need mechanism that would manage which pods are reading from that storage in order to avoid data inconsistency 
+   - so when pod dies, there will be downtime where user can reach, so thats why we are replicating everything
+   - we should specify how many replicas should run , define that blueprints and these are Deployment
+   - you mostly work with Deployment rather than with nodes
+   - if your pod dies, service will forward the request to another working replica to avoid downtime 
+   - :warning: DB can't be replicated via Deployment
+   - If we the clones replicas of db they would all need to  access the same shared data storage and there
+   - you would need mechanism that would manage which pods are reading from that storage in order to avoid data inconsistency 
