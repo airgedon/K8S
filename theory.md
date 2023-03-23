@@ -23,4 +23,5 @@
    - if your pod dies, service will forward the request to another working replica to avoid downtime 
    - :warning: DB can't be replicated via Deployment
    - If we the clones replicas of db they would all need to  access the same shared data storage and there
-   - you would need mechanism that would manage which pods are reading from that storage in order to avoid data inconsistency 
+     you would need mechanism that would manage which pods are reading from that storage in order to avoid data inconsistency 
+     so here you need Stateful Set component
