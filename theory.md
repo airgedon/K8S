@@ -1,4 +1,5 @@
-- **Node** - simple server
+- **Node** 
+  - simple server
 - **Pod**   
   -  abstraction over container 
   -  creates env on top of the container
