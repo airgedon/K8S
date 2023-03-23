@@ -1,3 +1,5 @@
+## Basic Components
+
 - **Node** 
   - simple server
 - **Pod**   
@@ -26,3 +28,27 @@
    - If we the clones replicas of db they would all need to  access the same shared data storage and there
      you would need mechanism that would manage which pods are reading from that storage in order to avoid data inconsistency 
      so here you need Stateful Set component
+
+## K8s Architecture
+### 3 Node proccessses:
+- **Kubelet** - proccess of k8s itself, that has interface both - the container and node.
+   - it is responsible for taking that configuration and running the pod
+- **Kube Proxy** - forwards the requests 
+-  **Container Runtime** - in order to for k8s cluster function properly
+
+### So, how do you interact with cluster?
+  
+- How to:
+ - schedule pod ?
+ - monitor ?
+ - re-schedule/r-start pod ?
+ - join a new Node ?
+
+> 🔑 Answer: all this managing proccesses are done by **Master Nodes**
+
+
+ 
+ 
+
+
+  
