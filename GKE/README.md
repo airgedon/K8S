@@ -19,6 +19,8 @@ tar -xf google-cloud-cli-421.0.0-linux-x86_64.tar.gz
 
 [path-to-my-home]/google-cloud-sdk/completion.bash.inc
 
+> :warning: Close the terminal
+
 ---
 
 >  To initialize the gcloud CLI, run gcloud init:
