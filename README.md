@@ -348,3 +348,36 @@ kubectl get pod
 ```
 kubectl exec -i -t nginx-deployment-8859878f8-7gfw9 -- /bin/bash
 ```
+
+> You now have shell access to the Nginx container. The -i flag passes STDIN to the container, and -t gives you an interactive TTY. The -- double-dash acts as a separator for the kubectl command and the command you’d like to run inside the container. In this case, we are running /bin/bash.
+
+
+> To run commands inside the container without opening a full shell, omit the -i and -t flags, and substitute the command you’d like to run instead of /bin/bash:
+
+```
+kubectl exec nginx-deployment-8859878f8-7gfw9 ls
+```
+
+### Fetching Logs
+
+> Another useful command is logs, which prints logs for Pods and containers, including terminated containers.
+
+> To stream logs to your terminal output, you can use the -f flag:
+
+```
+kubectl logs -f nginx-deployment-8859878f8-7gfw9
+```
+
+🔍 This command will keep running in your terminal until interrupted with a CTRL+C. You can omit the -f flag if you’d like to print log output and exit immediately.
+
+🔍 You can also use the -p flag to fetch logs for a terminated container. When this option is used within a Pod that had a prior running container instance, logs will print output from the terminated container:
+
+```
+kubectl logs -p nginx-deployment-8859878f8-7gfw9
+```
+🔍 The -c flag allows you to specify the container you’d like to fetch logs from, if the Pod has multiple containers. You can use the --all-containers=true flag to fetch logs from all containers in the Pod.
+
+## Port Forwarding and Proxying
+
+
+
