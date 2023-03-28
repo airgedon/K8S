@@ -227,7 +227,7 @@ kubectl delete -f nginx-deployment.yaml
 >  The --dry-run flag allows you to preview the result of the operation without actually performing it:
 
 ```
-kubectl create -f nginx-deployment.yaml --dry-run
+kubectl create -f nginx-deployment.yaml --dry-run=client
 ```
 
 > We can now create the object:
