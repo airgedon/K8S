@@ -147,5 +147,151 @@ kubectl get deployment app_frontend
 
 ## Declarative Management and `kubectl apply`
 
+### Rolling out a Deployment
 
+> For example, to deploy the sample Nginx Deployment to your cluster, use apply and provide the path to the nginx-deployment.yaml manifest file:
+
+```
+kubectl apply -f nginx-deployment.yaml
+```
+
+> You can track the rollout status using rollout status:
+
+```
+kubectl rollout status deployment/nginx-deployment
+```
+
+> An alternative to rollout status is the kubectl get command, along with the -w (watch) flag:
+
+```
+kubectl get deployment -w
+```
+
+> Using rollout pause and rollout resume, you can pause and resume the rollout of a Deployment:
+
+```
+kubectl rollout pause deployment/nginx-deployment
+```
+
+```
+kubectl rollout resume deployment/nginx-deployment
+```
+
+### Modifying a Running Deployment
+
+###### If you’d like to modify a running Deployment, you can make changes to its manifest file and then run kubectl apply again to apply the update.
+
+> The kubectl diff command allows you to see a diff between currently running resources, and the changes proposed in the supplied configuration file:
+
+```
+kubectl diff -f nginx-deployment.yaml
+```
+
+> Now allow Kubernetes to perform the update using apply:
+
+```
+kubectl apply -f nginx-deployment.yaml
+```
+
+###### If you run apply again without modifying the manifest file, Kubernetes will detect that no changes were made and won’t perform any action.
+
+> Using rollout history you can see a list of the Deployment’s previous revisions:
+
+```
+kubectl rollout history deployment/nginx-deployment
+```
+
+> With rollout undo, you can revert a Deployment to any of its previous revisions:
+
+```
+kubectl rollout undo deployment/nginx-deployment --to-revision=1
+```
+### Deleting a Deployment
+
+> To delete a running Deployment, use kubectl delete:
+
+```
+kubectl delete -f nginx-deployment.yaml
+```
+
+## Imperative Management
+
+###### You can also use a set of imperative commands to directly manipulate and manage Kubernetes resources.
+
+### Creating a Deployment
+
+
+> Use create to create an object from a file, URL, or STDIN. Note that unlike apply, if an object with the same name already exists, the operation will fail.
  
+ 
+>  The --dry-run flag allows you to preview the result of the operation without actually performing it:
+
+```
+kubectl create -f nginx-deployment.yaml --dry-run
+```
+
+> We can now create the object:
+
+```
+kubectl create -f nginx-deployment.yaml
+```
+
+### Modifying a Running Deployment
+
+> Use scale to scale the number of replicas for the Deployment from 2 to 4:
+
+```
+kubectl scale --replicas=4 deployment/nginx-deployment
+```
+
+> You can edit any object in-place using kubectl edit. This will open up the object’s manifest in your default editor:
+
+```
+kubectl edit deployment/nginx-deployment
+```
+
+> Now run a get to inspect the changes:
+
+```
+kubectl get deployment/nginx-deployment
+```
+
+###### We’ve successfully scaled the Deployment back down to 2 replicas on-the-fly. You can update most of a Kubernetes’ object’s fields in a similar manner.
+
+###### Another useful command for modifying objects in-place is kubectl patch. Using patch, you can update an object’s fields on-the-fly without having to open up your editor. patch also allows for more complex updates with various merging and patching strategies. 
+
+[Update API Objects in Place Using kubectl patch](https://kubernetes.io/docs/tasks/run-application/update-api-object-kubectl-patch)
+
+> The following command will patch the nginx-deployment object to update the replicas field from 2 to 4; deploy is shorthand for the deployment object.
+
+```
+kubectl patch deploy nginx-deployment -p '{"spec": {"replicas": 4}}'
+```
+> We can now inspect the changes:
+
+```
+kubectl get deployment/nginx-deployment
+```
+
+> You can also create a Deployment imperatively using the run command. run will create a Deployment using an image provided as a parameter:
+
+```
+kubectl run nginx-deployment --image=nginx --port=80 --replicas=2
+```
+> The expose command lets you quickly expose a running Deployment with a Kubernetes Service, allowing connections from outside your Kubernetes cluster:
+
+```
+kubectl expose deploy nginx-deployment --type=LoadBalancer --port=80 --name=nginx-svc
+```
+
+###### Here we’ve exposed the nginx-deployment Deployment as a LoadBalancer Service, opening up port 80 to external traffic and directing it to container port 80. We name the service nginx-svc.
+
+> Using the LoadBalancer Service type, a cloud load balancer is automatically provisioned and configured by Kubernetes. To get the Service’s external IP address, use get:
+
+```
+kubectl get svc nginx-svc
+```
+
+> You can access the running Nginx containers by navigating to EXTERNAL-IP in your web browser.
+
+## Inspecting Workloads and Debugging
