@@ -145,7 +145,7 @@ Where
 kubectl get deployment app_frontend
 ```
 
-## Declarative Management and `kubectl apply`
+# Declarative Management and `kubectl apply`
 
 ### Rolling out a Deployment
 
@@ -214,7 +214,7 @@ kubectl rollout undo deployment/nginx-deployment --to-revision=1
 kubectl delete -f nginx-deployment.yaml
 ```
 
-## Imperative Management
+# Imperative Management
 
 ###### You can also use a set of imperative commands to directly manipulate and manage Kubernetes resources.
 
