@@ -295,3 +295,56 @@ kubectl get svc nginx-svc
 > You can access the running Nginx containers by navigating to EXTERNAL-IP in your web browser.
 
 ## Inspecting Workloads and Debugging
+
+###### There are several commands you can use to get more information about workloads running in your cluster.
+
+#### Inspecting Kubernetes Resources
+
+> `kubectl get` fetches a given Kubernetes resource and displays some basic information associated with it:
+
+```
+kubectl get deployment -o wide
+```
+
+> for all namespaces
+
+```
+kubectl get deployment -A -o wide
+```
+
+###### Since we did not provide a Deployment name or Namespace, kubectl fetches all Deployments in the current Namespace.
+
+>  The -o flag provides additional information like CONTAINERS and IMAGES
+
+> In addition to get, you can use describe to fetch a detailed description of the resource and associated resources:
+
+```
+kubectl describe deploy nginx-deployment
+```
+###### The set of information presented will vary depending on the resource type. You can also use this command without specifying a resource name, in which case information will be provided for all resources of that type in the current Namespace.
+
+> explain allows you to quickly pull configurable fields for a given resource type:
+
+```
+kubectl explain deployment.spec
+```
+
+> By appending additional fields you can dive deeper into the field hierarchy:
+
+```
+kubectl explain deployment.spec.template.spec
+```
+
+#### Gaining Shell Access to a Container
+
+> To gain shell access into a running container, use exec. First, find the Pod that contains the running container you’d like access to:
+
+```
+kubectl get pod
+```
+
+> Let’s exec into the first Pod. Since this Pod has only one container, we don’t need to use the -c flag to specify which container we’d like to exec into.
+
+```
+kubectl exec -i -t nginx-deployment-8859878f8-7gfw9 -- /bin/bash
+```
