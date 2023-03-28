@@ -148,3 +148,4 @@ kubectl get deployment app_frontend
 ## Declarative Management and `kubectl apply`
 
 
+ 
