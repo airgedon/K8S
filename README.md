@@ -14,6 +14,9 @@ kubectl cluster-info
 ```
 kubectl config view
 ```
+```
+sudo nano .kube/config
+```
 
 ### Modifying Clusters
 
