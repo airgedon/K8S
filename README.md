@@ -379,5 +379,27 @@ kubectl logs -p nginx-deployment-8859878f8-7gfw9
 
 ## Port Forwarding and Proxying
 
+> To gain network access to a Pod, you can use port-forward:
+
+```
+sudo kubectl port-forward pod/nginx-deployment-8859878f8-7gfw9 80:80
+```
+> In this case we use sudo because local port 80 is a protected port. For most other ports you can omit sudo and run the kubectl command as your system user.
+
+🔍 Here we forward local port 80 (preceding the colon) to the Pod’s container port 80 (after the colon).
+
+🔎 You can also use deploy/nginx-deployment as the resource type and name to forward to. If you do this, the local port will be forwarded to the Pod selected by the Deployment.
+
+> The proxy command can be used to access the Kubernetes API server locally:
+
+kubectl proxy --port=8080
+
+> In another shell, use curl to explore the API:
+
+```
+curl http://localhost:8080/api/
+```
+
+> Close the proxy by hitting CTRL-C.
 
 
