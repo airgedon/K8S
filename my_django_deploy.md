@@ -1,6 +1,6 @@
 > Dockerfile
 
-```
+```dockerfile
 FROM ubuntu:20.04
 
 RUN apt-get update && apt-get install -y tzdata && apt install -y python3.8 python3-pip
@@ -11,9 +11,9 @@ RUN pip install django gunicorn psycopg2
 
 ENV PYTHONUNBUFFERED 1
 
-ADD . /home/ubuntu/Backend
+ADD . ___WORKDIR___
 
-WORKDIR /home/ubuntu/Backend
+WORKDIR ___WORKDIR___
 
 COPY . .
 
@@ -22,10 +22,41 @@ RUN pip install -r requirements.txt
 
 EXPOSE 8000
 
-CMD ["gunicorn", "--bind", ":8000", "--workers", "3", "devsearch.wsgi"]
+CMD ["gunicorn", "--bind", ":8000", "--workers", "3", "__name__.wsgi"]
 
 ```
 
+```
+docker build -t djangokubernetesproject.
+```
+
+```
+docker run -i -t djangokubernetesproject sh
+```
+
+```
+python3 manage.py makemigrations && python3 manage.py migrate
+```
+```
+python3 manage.py collectstatic
+```
+```
+python3 manage.py createsuperuser
+```
+> check if running
+
+> authorize to Docker Hub
+
+```
+docker login
+```
+```
+docker tag [image id] deepmatr1x/django:tagname
+```
+```
+docker push deepmatr1x/django:tagname
+```
+---
 
 ```
 sudo nano django-deployment.yml
