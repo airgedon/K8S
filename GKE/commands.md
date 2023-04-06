@@ -52,3 +52,4 @@ gcloud iam service-accounts keys create key.json --iam-account=teodor@eco-spirit
 ```
 export GKE_SA_KEY=$(cat key.json | base64)
 ```
+ 
