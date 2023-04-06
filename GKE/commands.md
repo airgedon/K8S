@@ -39,3 +39,16 @@ gcloud projects add-iam-policy-binding eco-spirit-380605 --member='serviceAccoun
 ```
 gcloud projects add-iam-policy-binding eco-spirit-380605 --member='serviceAccount:teodor@eco-spirit-380605.iam.gserviceaccount.com'  --role=roles/storage.admin
 ```
+---
+
+> Download the JSON keyfile for the service account:
+
+```
+gcloud iam service-accounts keys create key.json --iam-account=teodor@eco-spirit-380605.iam.gserviceaccount.com
+```
+
+> Store the service account key as a secret named GKE_SA_KEY:
+
+```
+export GKE_SA_KEY=$(cat key.json | base64)
+```
