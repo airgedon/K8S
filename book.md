@@ -50,7 +50,18 @@
 
 #### Namespaces in Kubernetes allow objects to be grouped. Namespaces can be used for logical groupings
 
-- By default, there are three namespaces in a K8s cluster, default, kube-public and kube-system.
+
+- By default, there are three namespaces in a K8s cluster:
+
+- default
+  - The default namespace set by the system.
+- kube-public 
+  - This namespace is created by the system and is visible to all users, even users that aren’t authenticated.
+- kube-system
+  - This namespace is assigned to resources that are created by the Kubernetes system.
+- kube-node-lease 
+  - This namespace holds lease objects associated with each node. These leases allow the kubelet to send heartbeats so that you can determine node availability.
+
 
 ```
 a group of developers may only have access to a namespace called dev , and have no access to the production namespace.
