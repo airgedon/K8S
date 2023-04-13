@@ -121,3 +121,27 @@ kubectl apply -f namespace.yml
 ```
 
 # How to Restart Kubernetes Pods With Kubectl
+
+```
+kubectl rollout restart
+```
+> pod will not introduce downtime as pods will be functioning. A rollout restart will kill one pod at a time, then new pods will be scaled up. 
+
+```
+kubectl rollout restart deployment <deployment_name> -n <namespace>
+```
+---
+
+```
+kubectl scale
+```
+
+>  it can be a quicker alternative to the kubectl rollout restart method
+
+>  If there is no YAML file associated with the deployment, you can set the number of replicas to 0.
+
+> Pod status can be checked during the scaling using:
+
+```
+kubectl get pods -n <namespace>
+```
