@@ -13,7 +13,12 @@ certbot certonly --manual --preferred-challenges=dns -d deep-matrix.site -d *.de
 
 > Once certbot has verified that you own the domain, it will generate a private key and SSL certificate for you. The private key will be stored in /etc/letsencrypt/live/example.com/privkey.pem, and the SSL certificate will be stored in /etc/letsencrypt/live/example.com/fullchain.pem.
 
+```
+kubectl create ns ev
+```
+
 - Create a Kubernetes TLS secret using the following command:
+
 
 ```
 kubectl create secret tls letsencrypt-staging --key=/etc/letsencrypt/live/deep-matrix.site/privkey.pem --cert=/etc/letsencrypt/live/deep-matrix.site/fullchain.pem -n ev
@@ -45,8 +50,14 @@ spec:
             class: nginx
 
 ```
-> kubectl apply -f clusterIssuer.yaml -n ev
 
+```
+kubectl apply -f https://github.com/jetstack/cert-manager/releases/download/v1.5.4/cert-manager.crds.yaml
+```
+
+```
+kubectl apply -f clusterIssuer.yaml -n ev
+```
 
 ```yaml
 apiVersion: cert-manager.io/v1
@@ -61,7 +72,10 @@ spec:
     name: letsencrypt-staging
     kind: ClusterIssuer
 ```
-> kubectl apply -f certificate.yaml -n ev
+
+```
+kubectl apply -f certificate.yaml -n ev
+```
 
 Note that in the above example, the tls.secretName field of the Ingress resource and the spec.secretName field of the Certificate resource are both set to letsencrypt-staging, which is the name of the Kubernetes secret that contains the SSL certificate and private key.
 
@@ -131,5 +145,25 @@ spec:
                   name: https
 ```
 
-> kubectl apply -f eventorro.yml -n ev
+```
+kubectl apply -f eventorro.yml -n ev
+```
+---
 
+> Check
+
+```
+kubectl describe ingress -n ev
+```
+
+```
+kubectl describe service -n ev
+```
+
+```
+kubectl describe pod -n ev
+```
+
+```
+kubectl logs -n ev
+```
