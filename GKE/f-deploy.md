@@ -21,7 +21,7 @@ kubectl create ns ev
 
 
 ```
-kubectl create secret tls letsencrypt-staging --key=/etc/letsencrypt/live/deep-matrix.site/privkey.pem --cert=/etc/letsencrypt/live/deep-matrix.site/fullchain.pem -n ev
+kubectl create secret tls eventerro-tls --key=/etc/letsencrypt/live/deep-matrix.site/privkey.pem --cert=/etc/letsencrypt/live/deep-matrix.site/fullchain.pem -n ev
 ```
 
 > Replace letsencrypt-staging with the name of your secret, and example.com with your domain name.
@@ -146,7 +146,7 @@ spec:
 ```
 
 ```
-kubectl apply -f eventorro.yml -n ev
+kubectl apply -f eventerro.yaml -n ev
 ```
 ---
 
