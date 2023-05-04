@@ -66,3 +66,70 @@ spec:
 Note that in the above example, the tls.secretName field of the Ingress resource and the spec.secretName field of the Certificate resource are both set to letsencrypt-staging, which is the name of the Kubernetes secret that contains the SSL certificate and private key.
 
 Additionally, the dnsNames field of the Certificate resource should be set to the domain names that the certificate is valid for (in this case, example.com). The issuerRef field should reference the name of the ClusterIssuer resource that you created earlier.
+
+---
+
+```yml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: eventerro-deployment
+spec:
+  selector:
+    matchLabels:
+      app: eventerro
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: eventerro
+    spec:
+      containers:
+      - name: eventerro
+        image: deepmatr1x/react:eventerro
+        ports:
+        - containerPort: 3000
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: eventerro-service
+spec:
+  selector:
+    app: eventerro
+  ports:
+    - name: http
+      port: 80
+      targetPort: 3000
+    - name: https
+      port: 443
+      targetPort: 3000
+  type: LoadBalancer
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: eventerro-ingress
+  annotations:
+    cert-manager.io/cluster-issuer: "letsencrypt-staging"
+    nginx.ingress.kubernetes.io/ssl-redirect: "true"
+spec:
+  tls:
+    - hosts:
+        - deep-matrix.site
+      secretName: letsencrypt-staging
+  rules:
+    - host: deep-matrix.site
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: eventerro-service
+                port:
+                  name: https
+```
+
+> kubectl apply -f eventorro.yml -n ev
+
