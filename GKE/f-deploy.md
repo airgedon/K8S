@@ -164,3 +164,6 @@ kubectl describe service -n ev
 kubectl describe pod -n ev
 ```
 
+```
+kubectl logs -n ns eventerro-deployment-56c846d94f-prpw6
+```
