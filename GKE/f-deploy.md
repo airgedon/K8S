@@ -164,6 +164,3 @@ kubectl describe service -n ev
 kubectl describe pod -n ev
 ```
 
-```
-kubectl logs -n ev
-```
