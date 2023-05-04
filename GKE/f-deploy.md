@@ -168,6 +168,3 @@ kubectl describe pod -n ev
 kubectl logs -n ns eventerro-deployment-56c846d94f-prpw6
 ```
 
-```
-kubectl logs -n ev eventerro-deployment-56c846d94f-prpw6
-```
