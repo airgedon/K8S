@@ -87,6 +87,33 @@ Additionally, the dnsNames field of the Certificate resource should be set to th
 ---
 
 ```yml
+apiVersion: v1
+kind: Service
+metadata:
+  name: eventerro
+spec:
+  type: LoadBalancer
+  loadBalancerIP: 104.198.73.168
+  selector:
+    app: eventerro
+  ports:
+  - name: http
+    protocol: TCP
+    port: 80
+    targetPort: 80
+  - name: https
+    protocol: TCP
+    port: 443
+    targetPort: 443
+  externalTrafficPolicy: Local
+```
+> ⚠️ create static External IP with premium and regional ( cause there are less restrictions) credentials in GCP
+
+```
+kubectl apply -f serivice.yaml -n ev
+```
+
+```yml
 apiVersion: apps/v1
 kind: Deployment
 metadata:
