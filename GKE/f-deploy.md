@@ -45,9 +45,12 @@ spec:
     privateKeySecretRef:
       name: letsencrypt-staging
     solvers:
-      - http01:
-          ingress:
-            class: nginx
+      - dns01:
+          cloudDNS:
+            project: deep-matrix
+            serviceAccountSecretRef:
+              name: teodor@deep-matrix.iam.gserviceaccount.com
+              key: key.json
 
 ```
 
@@ -63,11 +66,11 @@ kubectl apply -f clusterIssuer.yaml -n ev
 apiVersion: cert-manager.io/v1
 kind: Certificate
 metadata:
-  name: eventerro-cert
+  name: eventerro-tls
 spec:
   dnsNames:
     - deep-matrix.site
-  secretName: letsencrypt-staging
+  secretName: eventerro-tls
   issuerRef:
     name: letsencrypt-staging
     kind: ClusterIssuer
@@ -102,28 +105,34 @@ spec:
       - name: eventerro
         image: deepmatr1x/react:eventerro
         ports:
-        - containerPort: 3000
+        - containerPort: 80
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  name: eventerro-service
+  name: eventerro
+  namespace: ev
 spec:
   selector:
     app: eventerro
+    app.kubernetes.io/component: controller
+    app.kubernetes.io/name: ingress-nginx
   ports:
     - name: http
+      protocol: TCP
       port: 80
-      targetPort: 3000
+      targetPort: 80
     - name: https
+      protocol: TCP
       port: 443
-      targetPort: 3000
+      targetPort: 443
   type: LoadBalancer
+  externalTrafficPolicy: Local
 ---
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: eventerro-ingress
+  name: eventerro
   annotations:
     cert-manager.io/cluster-issuer: "letsencrypt-staging"
     nginx.ingress.kubernetes.io/ssl-redirect: "true"
@@ -131,7 +140,7 @@ spec:
   tls:
     - hosts:
         - deep-matrix.site
-      secretName: letsencrypt-staging
+      secretName: eventerro-tls
   rules:
     - host: deep-matrix.site
       http:
@@ -140,9 +149,10 @@ spec:
             pathType: Prefix
             backend:
               service:
-                name: eventerro-service
+                name: eventerro
                 port:
                   name: https
+
 ```
 
 ```
