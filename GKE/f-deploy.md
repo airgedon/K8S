@@ -110,7 +110,7 @@ spec:
 > ⚠️ create static External IP with premium and regional ( cause there are less restrictions) credentials in GCP
 
 ```
-kubectl apply -f serivice.yaml -n ev
+kubectl apply -f service.yaml -n ev
 ```
 
 ```yml
