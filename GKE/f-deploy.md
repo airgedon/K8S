@@ -227,3 +227,6 @@ gcloud compute forwarding-rules list
 ```
 gcloud compute target-pools list
 ```
+```
+gcloud compute forwarding-rules delete newest --region=us-central1
+```
