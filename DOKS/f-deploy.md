@@ -15,3 +15,10 @@ sudo snap install doctl
 ```
 doctl kubernetes cluster kubeconfig save use_your_cluster_name
 ```
+> to save credentials file
+
+```
+doctl kubernetes cluster kubeconfig save <cluster-name>
+```
+######done
+---
