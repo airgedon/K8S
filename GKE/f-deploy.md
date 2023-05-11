@@ -204,4 +204,26 @@ kubectl describe pod -n ev
 ```
 kubectl logs -n ns eventerro-deployment-56c846d94f-prpw6
 ```
+---
+## Setting up Forwarding rule and Target pool 
 
+> a forwarding rule is a set of instructions that tells the load balancer where to send traffic, while a target pool is a collection of instances that are capable of handling the incoming traffic.
+
+```
+gcloud compute target-pools create newest --region=us-central
+```
+
+```
+gcloud compute target-pools add-instances newest --instances-zone us-central1-c --instances gke-my-first-cluster-1-default-pool-70b87357-ak7w,gke-my-first-cluster-1-default-pool-70b87357-hof3,gke-my-first-cluster-1-default-pool-70b87357-yvun
+```
+
+```
+cloud compute forwarding-rules create newest     --region=us-central1     --ip-protocol=TCP     --ports=80-443    --address=104.198.73.168 --target-pool=newest     --project=deep-matrix
+```
+
+```
+gcloud compute forwarding-rules list
+```
+```
+gcloud compute target-pools list
+```
