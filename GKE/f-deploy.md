@@ -122,7 +122,7 @@ spec:
   selector:
     matchLabels:
       app: eventerro
-  replicas: 1
+  replicas: 3
   template:
     metadata:
       labels:
@@ -134,28 +134,6 @@ spec:
         ports:
         - containerPort: 80
 ---
-apiVersion: v1
-kind: Service
-metadata:
-  name: eventerro
-  namespace: ev
-spec:
-  selector:
-    app: eventerro
-    app.kubernetes.io/component: controller
-    app.kubernetes.io/name: ingress-nginx
-  ports:
-    - name: http
-      protocol: TCP
-      port: 80
-      targetPort: 80
-    - name: https
-      protocol: TCP
-      port: 443
-      targetPort: 443
-  type: LoadBalancer
-  externalTrafficPolicy: Local
----
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
@@ -163,6 +141,7 @@ metadata:
   annotations:
     cert-manager.io/cluster-issuer: "letsencrypt-staging"
     nginx.ingress.kubernetes.io/ssl-redirect: "true"
+    kubernetes.io/ingress.regional-static-ip-name: "newest"
 spec:
   tls:
     - hosts:
