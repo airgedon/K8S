@@ -22,3 +22,7 @@ doctl kubernetes cluster kubeconfig save <cluster-name>
 ```
 ###### done 
 ---
+
+```
+scp -r directory/ user@remote.host:/path/to/destination/
+```
