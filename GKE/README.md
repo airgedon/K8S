@@ -55,14 +55,8 @@ gcloud components install gke-gcloud-auth-plugin
 
 > Connect to the cluster that have already been created in cloud
 ```
-gcloud container clusters get-credentials cluster-1 --zone europe-north1-c --project eco-spirit-380605
+gcloud container clusters get-credentials my-first-cluster-1 --zone us-central1-c --project deep-matrix
 ```
 ⚠️: use zonal clusters not regional because it needs more quotes 300(meanwhile you only have 250 limit)
 
----
 
-> для настройки kubectl
-
-```
-gcloud container clusters get-credentials cluster-1 --zone  europe-north1-c 
-```
